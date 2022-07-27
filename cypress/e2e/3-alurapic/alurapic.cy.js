@@ -63,5 +63,13 @@ describe('Testa o registro e login de usuários no alura pic', () => {
         cy.on('window:alert', (str) => {
             expect(str).to.equal('Invalid user name or password')
         })
-    })    
+    })
+
+    it.only('fazer registro de um novo usuário', () => {
+        cy.register('teste@gmail.com', 'Felipe da Silva', 'felipesilva3', '12345678');
+        //cy.on('window:alert', (str) => {
+        //    expect(str).to.equal('Invalid user name or password')
+        //})
+    })
+
 })
