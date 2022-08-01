@@ -1,4 +1,4 @@
-describe('Testa o registro e login de usuários no alura pic', () => { 
+describe('Testando a página inicial do alura pic', () => { 
 
     beforeEach(() => { 
         cy.visit('https://alura-fotos.herokuapp.com') 
@@ -16,31 +16,6 @@ describe('Testa o registro e login de usuários no alura pic', () => {
         cy.contains('ap-vmessage', 'Password is required!').should('be.visible');
     })
 
-    it('verifica mensagem de e-mail inválido', () => {
-        cy.contains('a', 'Register now').click();
-        cy.contains('button', 'Register').click();
-        cy.contains('ap-vmessage', 'Email is required!').should('be.visible');
-
-        //Execute a second click and check for more warning messages:
-        cy.contains('button', 'Register').click();
-
-        //Simulate an invalid email input and checking for the warning message
-        cy.get('input[formcontrolname="email"]').type("rafael.gonzaga");
-        cy.contains('ap-vmessage', 'Invalid e-mail').should('be.visible');
-    })
-
-    it('verifica mensagem de senha com menos de 8 caracteres', () => {
-        cy.contains('a', 'Register now').click();
-
-        //Execute a second click and check for more warning messages:
-        cy.contains('button', 'Register').click();
-
-        //Simulate an invalid email input and checking for the warning message
-        cy.get('input[formcontrolname="password"]').type("123");
-        cy.contains('button', 'Register').click();
-        cy.contains('ap-vmessage', 'Mininum length is 8').should('be.visible');
-    })
-
     it('verifica mensagem de nome de usuário precisa ser minúsculo', () => {
         cy.contains('a', 'Register now').click();
 
@@ -52,28 +27,5 @@ describe('Testa o registro e login de usuários no alura pic', () => {
         cy.contains('button', 'Register').click();
         cy.contains('ap-vmessage', 'Must be lower case').should('be.visible');
     })
-
-    it('fazer login de usuário válido', () => {
-        cy.login('flavio', '123');
-        cy.contains('a', '(Logout)').should('be.visible');
-    })
-
-    it('fazer login de usuário inválido', () => {
-        cy.login('rafael', '1234');
-        cy.on('window:alert', (str) => {
-            expect(str).to.equal('Invalid user name or password')
-        })
-    })
-
-    const usuarios = require('../../fixtures/usuarios.json');
-    usuarios.forEach(usuario => {
-
-        it(`registra novo usuário ${usuario.userName}`, () => {
-            cy.register(usuario.email, usuario.fullName, usuario.userName, usuario.password);
-            //cy.on('window:alert', (str) => {
-            //    expect(str).to.equal('Invalid user name or password')
-            //})
-        })
-    });
 
 })
