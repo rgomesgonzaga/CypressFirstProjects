@@ -68,7 +68,7 @@ describe('Testa o registro e login de usuários no alura pic', () => {
     const usuarios = require('../../fixtures/usuarios.json');
     usuarios.forEach(usuario => {
 
-        it.only(`registra novo usuário ${usuario.userName}`, () => {
+        it(`registra novo usuário ${usuario.userName}`, () => {
             cy.register(usuario.email, usuario.fullName, usuario.userName, usuario.password);
             //cy.on('window:alert', (str) => {
             //    expect(str).to.equal('Invalid user name or password')
