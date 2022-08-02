@@ -1,8 +1,8 @@
 describe('Testa o registro de usuários no alura pic', () => { 
 
     beforeEach(() => { 
-        cy.visit('https://alura-fotos.herokuapp.com')
-
+        cy.visit('/')
+        
     })
 
     it('verifica mensagem de e-mail inválido', () => {
@@ -40,5 +40,5 @@ describe('Testa o registro de usuários no alura pic', () => {
             //})
         })
     });
-    
+
 })
