@@ -12,7 +12,21 @@ describe('Buscar fotos e dados via API da Alura Pics', ()=> {
         })
     })
 
-    it.only('fazer login do user flavio', ()=> {
+    const TempoEsperado = Math.random() * 3000;    
+    it.only('flaky test - buscar fotos do user flavio', ()=> {
+        cy.request({
+            method: 'GET',
+            url: 'https://apialurapic.herokuapp.com/flavio/photos'
+        }).then((res) => {
+            expect(res.status).to.be.equal(200)
+            expect(res.body).is.not.empty
+            expect(res.body[0]).to.have.property('description')
+            expect(res.body[0].description).to.be.equal('Farol iluminado')
+            expect(res.duration).to.be.lte(TempoEsperado)
+        })
+    })
+
+    it('fazer login do user flavio', ()=> {
         cy.request({
             method: 'POST',
             url: 'https://apialurapic.herokuapp.com/user/login',
